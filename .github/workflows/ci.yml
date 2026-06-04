@@ -31,3 +31,14 @@ jobs:
 
       - name: Test
         run: npm test
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - used: docker/login-activity@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          passworkd: ${{secrets.DOCKERHUB_TOKEN}}
+      - run: docker build -t gurleennkaur5/demo:v1 .
+      - run: docker push gurleennkaur5/demo:v1
