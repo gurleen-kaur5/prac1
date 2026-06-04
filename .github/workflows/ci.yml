@@ -9,8 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: DISPLAY NODE VERSION
+        run: node --version
       - name: Build
         run: npm run build
 
